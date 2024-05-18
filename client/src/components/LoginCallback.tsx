@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // 認証後localhost:3000/calbackへリダイレクトされた際のコールバック関数
 // アプリケーションの認可を行う(アクセストークンを取得しセッションに保存)
-const Callback = () => {
+const LoginCallback: React.FC = () => {
     const history = useHistory();
 
     useEffect(() => {
@@ -79,4 +79,4 @@ const Callback = () => {
     );
 };
 
-export default Callback;
+export default LoginCallback;
