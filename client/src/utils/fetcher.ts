@@ -1,3 +1,4 @@
+import { User } from '@/types/data';
 import axios from 'axios';
 
 export async function getPoint() {
@@ -17,7 +18,7 @@ export async function endQuestion() {
 
 export async function getStatus() {
   // TODO: ステータスを取得する
-  return { status: '質問対応中🙅‍♀️' };
+  return { status: '🙅‍♀️' };
 }
 
 export async function updateStatus(path: string) {
@@ -28,12 +29,12 @@ export async function updateStatus(path: string) {
 export async function getUsers() {
   // TODO: ユーザー一覧を取得する
   return [
-    { name: 'user1', status: '質問対応中🙅‍♀️', id: 1 },
-    { name: 'user2', status: '待機中🙆‍♀️', id: 2 },
-    { name: 'user3', status: '待機中🙆‍♀️', id: 3 },
-    { name: 'user4', status: '質問対応中🙅‍♀️', id: 4 },
-    { name: 'user5', status: '待機中🙆‍♀️', id: 5 },
-  ];
+    { name: 'user1', status: '🙅‍♀️', id: 1 },
+    { name: 'user2', status: '🙆‍♀️', id: 2 },
+    { name: 'user3', status: '🙆‍♀️', id: 3 },
+    { name: 'user4', status: '🙅‍♀️', id: 4 },
+    { name: 'user5', status: '🙆‍♀️', id: 5 },
+  ] as User[];
 }
 
 export async function selectUser(id: number) {

@@ -1,16 +1,11 @@
 'use client';
 
 import { Button } from '@/components/button';
+import { User } from '@/types/data';
 import { emojis } from '@/utils/assets';
 import { getUsers, selectUser } from '@/utils/fetcher';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
-type User = {
-  name: string;
-  status: string;
-  id: number;
-};
 
 export function UserList() {
   const [users, setUsers] = useState<User[]>([]);
@@ -29,13 +24,23 @@ export function UserList() {
   return (
     <div>
       <h2 className='text-2xl'>ユーザーステータス一覧</h2>
-      {users.map((user) => (
-        <div key={user.name} className='flex justify-between items-center py-2'>
-          <span>{user.name}</span>
-          <span>{user.status}</span>
-          <Button onClick={() => jumpToUser(user.id)}>質問する</Button>
-        </div>
-      ))}
+      <div>
+        {emojis.map((emoji) => (
+          <div key={emoji.path}>
+            <h3 className='text-xl'>{emoji.text}</h3>
+            <div className='space-y-2 pl-4'>
+              {users
+                .filter((user) => user.status === emoji.label)
+                .map((user) => (
+                  <div key={user.id} className='flex justify-between items-center gap-2'>
+                    <span>{user.name}</span>
+                    <Button onClick={() => jumpToUser(user.id)}>選択</Button>
+                  </div>
+                ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
