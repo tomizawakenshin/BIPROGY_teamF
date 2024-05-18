@@ -1,7 +1,8 @@
 'use client';
 
 import { Button } from '@/components/button';
-import { getUsers, selectUser } from '@/util/fetcher';
+import { emojis } from '@/utils/assets';
+import { getUsers, selectUser } from '@/utils/fetcher';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 

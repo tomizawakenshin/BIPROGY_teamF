@@ -1,6 +1,6 @@
 'use client';
 
-import { getPoint } from '@/util/fetcher';
+import { getPoint } from '@/utils/fetcher';
 import { useEffect, useState } from 'react';
 
 export function PointView() {

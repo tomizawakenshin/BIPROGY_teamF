@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/button';
-import { getStatus, updateStatus } from '@/util/fetcher';
+import { getStatus, updateStatus } from '@/utils/fetcher';
 import { useEffect, useState } from 'react';
 
 type Emoji = {

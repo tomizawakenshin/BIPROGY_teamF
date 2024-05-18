@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/button';
-import { endQuestion, startQuestion } from '@/util/fetcher';
+import { endQuestion, startQuestion } from '@/utils/fetcher';
 
 export function QuestionStartEnd() {
   const router = useRouter();
