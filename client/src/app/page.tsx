@@ -3,14 +3,7 @@ import { Divider } from '@/components/divider';
 import { PointView } from '@/components/point-view';
 import { QuestionStartEnd } from '@/components/question-start-end';
 import { StatusButtons } from '@/components/status-buttons';
-
-const users = [
-  { name: 'user1', status: '質問対応中🙅‍♀️' },
-  { name: 'user2', status: '待機中🙆‍♀️' },
-  { name: 'user3', status: '待機中🙆‍♀️' },
-  { name: 'user4', status: '質問対応中🙅‍♀️' },
-  { name: 'user5', status: '待機中🙆‍♀️' },
-];
+import { UserList } from '@/components/user-list';
 
 export default function Home() {
   return (
@@ -22,16 +15,8 @@ export default function Home() {
         <PointView />
         <Divider />
         <StatusButtons />
-        <div>
-          <h2 className='text-2xl'>ユーザーステータス一覧</h2>
-          {users.map((user) => (
-            <div key={user.name} className='flex justify-between items-center py-2'>
-              <span>{user.name}</span>
-              <span>{user.status}</span>
-              <Button>質問する</Button>
-            </div>
-          ))}
-        </div>
+        <Divider />
+        <UserList />
       </div>
     </main>
   );
