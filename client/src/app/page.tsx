@@ -1,6 +1,7 @@
 import { Button } from '@/components/button';
 import { Divider } from '@/components/divider';
 import { PointView } from '@/components/point-view';
+import { QuestionStartEnd } from '@/components/question-start-end';
 
 const users = [
   { name: 'user1', status: '質問対応中🙅‍♀️' },
@@ -15,12 +16,7 @@ export default function Home() {
     <main className='flex flex-col items-center justify-center min-h-screen bg-zinc-200'>
       <div className='bg-white p-8 rounded shadow-lg space-y-4'>
         <h1 className='text-4xl font-bold'>エンジニアの質問箱</h1>
-        <div>
-          <div className='flex justify-between gap-2'>
-            <Button>質問開始</Button>
-            <Button>質問終了</Button>
-          </div>
-        </div>
+        <QuestionStartEnd />
         <Divider />
         <PointView />
         <Divider />
