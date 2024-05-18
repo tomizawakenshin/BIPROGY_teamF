@@ -3,25 +3,9 @@
 import { Button } from '@/components/button';
 import { getStatus, updateStatus } from '@/utils/fetcher';
 import { useEffect, useState } from 'react';
-
-type Emoji = {
-  label: string;
-  text: string;
-  path: string;
-};
-
-const emojis: Emoji[] = [
-  {
-    label: '🙅‍♀️',
-    text: '質問対応中',
-    path: 'x',
-  },
-  {
-    label: '🙆‍♀️',
-    text: '待機中',
-    path: 'o',
-  },
-];
+import { Tooltip } from '@/components/tooltip';
+import clsx from 'clsx';
+import { Emoji, emojis } from '@/utils/assets';
 
 export function StatusButtons() {
   const [status, setStatus] = useState<Emoji | null>({
@@ -44,21 +28,23 @@ export function StatusButtons() {
   }, []);
 
   return (
-    <div>
+    <div className='space-y-2'>
       <h2 className='text-2xl'>現在のステータス</h2>
       <div className='flex gap-2'>
         {emojis.map((emoji) => (
           <Button
-            className={
+            className={clsx(
+              'p-0',
               status?.path === emoji.path
                 ? 'bg-indigo-100 hover:bg-indigo-200 border-indigo-400'
                 : ''
-            }
+            )}
             key={emoji.text}
             onClick={() => changeStatus(emoji)}
           >
-            {emoji.label}
-            {emoji.text}
+            <Tooltip className='p-2' title={emoji.text}>
+              <span className='text-6xl'>{emoji.label}</span>
+            </Tooltip>
           </Button>
         ))}
       </div>
