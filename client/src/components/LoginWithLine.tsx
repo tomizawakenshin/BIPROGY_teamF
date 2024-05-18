@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import GenerateRandomString from '@/utils/GenerateRandomString';
 
 const LoginWithLine: React.FC = () => {
@@ -18,14 +19,16 @@ const LoginWithLine: React.FC = () => {
     return (
         <div
             id="lineLoginButton"
-            style={{
-                width: '300px',
-                height: '45px',
-                background: 'url("https://developers.line.biz/media/sign_in_with_LINE_btn_medium.png") no-repeat center/contain',
-                cursor: 'pointer'
-            }}
             onClick={handleLogin}
-        />
+            style={{ cursor: 'pointer' }}
+        >
+            <Image
+                src="/btn_login_base.png"
+                alt="Line login button"
+                priority={true}
+                quality={100}
+            />
+        </div>
     );
 };
 

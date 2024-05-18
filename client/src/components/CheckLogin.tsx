@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useEffect, useState, ReactNode } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 interface CheckLoginProps {

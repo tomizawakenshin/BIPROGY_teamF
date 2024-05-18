@@ -5,8 +5,7 @@ import LoginWithLine from '@/components/LoginWithLine';
 
 const LoginPage: React.FC = () => {
     return (
-        <div>
-            <h1>Login with LINE</h1>
+        <div className="flex items-center justify-center min-h-screen">
             <LoginWithLine />
         </div>
     );
