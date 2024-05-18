@@ -15,7 +15,12 @@ export async function endQuestion() {
   return { message: '質問を終了しました' };
 }
 
-export async function changeStatus(path: string) {
+export async function getStatus() {
+  // TODO: ステータスを取得する
+  return { status: '質問対応中🙅‍♀️' };
+}
+
+export async function updateStatus(path: string) {
   // TODO: ステータスを変更する
   return { message: 'ステータスを変更しました' };
 }
