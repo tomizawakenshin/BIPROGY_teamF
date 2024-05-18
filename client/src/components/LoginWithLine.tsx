@@ -1,10 +1,10 @@
 import React from 'react';
-import GenerateRandomString from '@/utils/GenerateRandomString'
+import GenerateRandomString from '@/utils/GenerateRandomString';
 
 const LoginWithLine: React.FC = () => {
     const handleLogin = () => {
-        const clientId = process.env.REACT_APP_CHANNEL_ID;
-        const redirectUri = encodeURIComponent('http://localhost:3000/callback');
+        const clientId = process.env.NEXT_PUBLIC_CHANNEL_ID;
+        const redirectUri = encodeURIComponent('http://localhost:3000/login/callback');
         const state = GenerateRandomString(8); // セッションごとに固有のランダム文字列を生成
         sessionStorage.setItem('loginState', state); // stateをセッションストレージに保存
         const scope = 'profile%20openid';
@@ -16,9 +16,16 @@ const LoginWithLine: React.FC = () => {
     };
 
     return (
-        <button onClick={handleLogin}>
-            Login with LINE
-        </button>
+        <div
+            id="lineLoginButton"
+            style={{
+                width: '300px',
+                height: '45px',
+                background: 'url("https://developers.line.biz/media/sign_in_with_LINE_btn_medium.png") no-repeat center/contain',
+                cursor: 'pointer'
+            }}
+            onClick={handleLogin}
+        />
     );
 };
 

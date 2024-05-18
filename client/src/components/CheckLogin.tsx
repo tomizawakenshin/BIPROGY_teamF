@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState, ReactNode } from 'react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 
-const CheckLogin: React.FC = ({ children }) => {
+interface CheckLoginProps {
+    children: ReactNode;
+}
+
+const CheckLogin: React.FC<CheckLoginProps> = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const history = useHistory();
+    const router = useRouter();
 
     useEffect(() => {
         const checkLoginStatus = async () => {
             const accessToken = sessionStorage.getItem('accessToken');
             if (!accessToken) {
-                history.push('/login');
+                router.push('/login');
                 return;
             }
 
@@ -25,21 +29,21 @@ const CheckLogin: React.FC = ({ children }) => {
                 if (response.data.loggedIn) {
                     setIsLoggedIn(true);
                 } else {
-                    history.push('/login');
+                    router.push('/login');
                 }
             } catch (error) {
-                console.error(error.message);
-                history.push('/login');
+                console.error(error);
+                router.push('/login');
             } finally {
                 setLoading(false);
             }
         };
 
         checkLoginStatus();
-    }, [history]);
+    }, [router]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>読込中...</div>;
     }
 
     if (!isLoggedIn) {
