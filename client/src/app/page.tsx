@@ -1,4 +1,6 @@
 import { Button } from '@/components/button';
+import { Divider } from '@/components/divider';
+import { PointView } from '@/components/point-view';
 
 const users = [
   { name: 'user1', status: '質問対応中🙅‍♀️' },
@@ -11,22 +13,17 @@ const users = [
 export default function Home() {
   return (
     <main className='flex flex-col items-center justify-center min-h-screen bg-zinc-200'>
-      <div className='bg-white p-8 rounded'>
+      <div className='bg-white p-8 rounded shadow-lg space-y-4'>
         <h1 className='text-4xl font-bold'>エンジニアの質問箱</h1>
         <div>
-          <h2 className='text-2xl'>質問</h2>
-          <div className='flex gap-2'>
+          <div className='flex justify-between gap-2'>
             <Button>質問開始</Button>
             <Button>質問終了</Button>
           </div>
         </div>
-        <div>
-          <h2>獲得ポイント</h2>
-          <div>
-            <span>100</span>
-            <span>pt</span>
-          </div>
-        </div>
+        <Divider />
+        <PointView />
+        <Divider />
         <div>
           <h2>ステータス</h2>
           <Button>質問対応中🙅‍♀️</Button>
