@@ -14,3 +14,8 @@ export async function endQuestion() {
   // TODO: 質問状態を終了にする
   return { message: '質問を終了しました' };
 }
+
+export async function changeStatus(path: string) {
+  // TODO: ステータスを変更する
+  return { message: 'ステータスを変更しました' };
+}

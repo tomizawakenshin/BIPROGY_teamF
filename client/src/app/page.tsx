@@ -2,6 +2,7 @@ import { Button } from '@/components/button';
 import { Divider } from '@/components/divider';
 import { PointView } from '@/components/point-view';
 import { QuestionStartEnd } from '@/components/question-start-end';
+import { StatusButtons } from '@/components/status-buttons';
 
 const users = [
   { name: 'user1', status: '質問対応中🙅‍♀️' },
@@ -20,11 +21,7 @@ export default function Home() {
         <Divider />
         <PointView />
         <Divider />
-        <div>
-          <h2>ステータス</h2>
-          <Button>質問対応中🙅‍♀️</Button>
-          <Button>待機中🙆‍♀️</Button>
-        </div>
+        <StatusButtons />
         <div>
           <h2 className='text-2xl'>ユーザーステータス一覧</h2>
           {users.map((user) => (
