@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 // 認証後localhost:3000/calbackへリダイレクトされた際のコールバック関数
 // アプリケーションの認可を行う(アクセストークンを取得しセッションに保存)
 const Callback = () => {
+    const history = useHistory();
+
     useEffect(() => {
         const fetchAccessToken = async (code) => {
             const clientId = process.env.REACT_APP_CHANNEL_ID;
@@ -46,6 +49,8 @@ const Callback = () => {
                     displayName: userInfo.displayName,
                     idToken: idToken
                 });
+
+                history.push('/');
             } catch (error) {
                 const errUrlParams = new URLSearchParams(window.location.search);
                 const errCode = errUrlParams.get('error')
@@ -54,13 +59,17 @@ const Callback = () => {
             }
         };
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        const state = urlParams.get('state');
+        const handleCallback = async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const state = urlParams.get('state');
 
-        if (state == sessionStorage.getItem('loginState')) {
-            fetchAccessToken(code);
-        }
+            if (state === sessionStorage.getItem('loginState')) {
+                await fetchAccessToken(code);
+            }
+        };
+
+        handleCallback();
     }, []);
 
     return (
