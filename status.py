@@ -57,11 +57,7 @@ def update_status():
     response_json, timestamp = update_kintone_status(user_id, status)
     
     if response_json:        
-        return jsonify({
-            'status': status,
-            'timestamp': timestamp,
-            'userName': user_name
-        }), 200
+        return jsonify(updated_record), 200
     else:
         return jsonify(response_json), status_code
 
