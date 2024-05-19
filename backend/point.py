@@ -49,6 +49,10 @@ PARAMS2={
   }
 }
 
+# ユーザー情報管理DB
+APPID3 = 6
+API_TOKEN3="pHRbZwtEMLU9se9oVxKfSJ8OisiJDeuIML372l3S"
+
 
 # -------------------------------- 関数定義 -----------------------------------
 def post_kintone_record(url,api_token,params):
@@ -115,8 +119,9 @@ def update_kintone_record(url, api_token, appid, recordid, auth_id, field_code, 
 
 def update_total_points(url, userid, points):
     records = get_kintone_record_by_uid(url, API_TOKEN2, APPID2, userid)
+    records2 = get_kintone_record_by_uid(url, API_TOKEN3, APPID3, userid)
 
-    if records:
+    if records and records2:
         # 現在の合計ポイントを取得して+1
         record = records[0]
         current_points = int(record['Total_Points']['value'])
@@ -126,6 +131,7 @@ def update_total_points(url, userid, points):
         record_id = record['$id']['value']
         auth_id = record['Auth_ID']['value']  # 必須フィールドを含める
         response = update_kintone_record(url, API_TOKEN2, APPID2, record_id, auth_id, 'Total_Points', new_points)
+        update_kintone_record(url, API_TOKEN3, APPID3, record_id, auth_id, 'Total_Points', new_points)
 
         # 結果の表示
         if response:
@@ -134,11 +140,11 @@ def update_total_points(url, userid, points):
         else:
             print("レコードの更新に失敗しました")
 
-# if __name__=="__main__":
-#     RESP=update_total_points(URL, 888, 1)
+if __name__=="__main__":
+    RESP=update_total_points(URL, 888, 1)
 
     
-#     print(RESP)
+    print(RESP)
 
 # ------------------------------ エンドポイントの定義 ----------------------------------
 @app.route('/record/<userid>/<int:points>', methods=['POST'])
@@ -157,3 +163,15 @@ def get_totalPoints_endpoint(userid):
         return jsonify({"error": "No records found for the user"}), 404
 
 @app.route('/record/<userid>', method=['POST'])
+def get_and_use_allpoints(userid):
+    records = get_kintone_record_by_uid(URL, API_TOKEN2, APPID2, userid)
+
+    if records:
+        record = records[0]
+        current_points = int(record['Total_Points']['value'])
+
+        update_total_points(userid, -current_points)    
+
+        return current_points
+    else:
+        return jsonify({"error": "No records found for the user"}), 404
