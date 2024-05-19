@@ -43,7 +43,7 @@ def update_kintone_q_status(user_id, status):
     else:
         return None, None
 
-@app.route('()/status', methods=['PUT'])
+@app.route('/status', methods=['PUT'])
 def update_q_status():
     data = request.json
     user_id = data.get('user_id')
