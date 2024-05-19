@@ -10,7 +10,7 @@ from flask import Blueprint, jsonify, request
 
 point_app = Blueprint('point_app', __name__)
 
-@point_app.route('/')
+@point_app.route('/point')
 def index():
     return 'Hello from point_app!'
 

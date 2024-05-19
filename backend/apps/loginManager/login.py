@@ -1,9 +1,9 @@
 import requests
-from flask import Blueprint, jsonify, request, make_response
+from flask import Blueprint, jsonify, request, make_response, Flask
 
 login_app = Blueprint('login_app', __name__)
 
-@login_app.route('/')
+@login_app.route('/login')
 def index():
     return 'Hello from point_app!'
 
@@ -72,6 +72,7 @@ def login():
 
     return response
 
+@login_app.route("/api/check-login", methods=["GET"])
 def check_login():
     user_id = request.cookies.get('userId')
 
@@ -85,3 +86,7 @@ def check_login():
         return jsonify({'loggedIn': True}), 200
     else:
         return jsonify({'loggedIn': False}), 401
+
+# @login_app.route("/api/helloworld", methods=["GET"])
+# def HelloWorld():
+#     return "HelloWorld!"
