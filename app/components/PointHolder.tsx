@@ -41,7 +41,7 @@ const pointCounter = (point : number) => {
                 <div className='flex justify-center m-10'>
                     <button 
                         onClick={() => {
-                            window.location.pathname = "/points"
+                            window.location.pathname = "/point"
                         }}
                         type="button"  
                         className="
@@ -69,6 +69,11 @@ const pointCounter = (point : number) => {
                             ">
                                 出撃する！
                     </button>
+                </div>
+                <div className='flex justify-center'>
+                    <p className='text-3xl'>
+                        現在<span className='font-bold'>{point}</span>名のメンバーが出撃できます！
+                    </p>
                 </div>
             </div>
         )
