@@ -86,7 +86,7 @@ def update_q_status():
     if response_json:        
         return jsonify(response_json), 200
     else:
-        return jsonify(response_json), status_code
+        return jsonify(response_json), 400
 
 
 if __name__ == '__main__':
