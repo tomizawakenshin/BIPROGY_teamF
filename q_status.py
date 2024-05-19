@@ -55,14 +55,7 @@ def update_q_status():
     else:
         return jsonify({'error': 'レコードの更新に失敗しました'}), 500
 
-@app.route('()/status', methods=['POST'])
-def update_q_status():
-    data = request.json
-    user_id = data.get('user_id')
-    status = data.get('status')
-    
-    response_json, timestamp = update_kintone_status(user_id, status)
-    
+    response_json, timestamp = update_kintone_status(user_id, status) 
     if response_json:        
         return jsonify({
             'status': status,
