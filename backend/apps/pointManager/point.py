@@ -6,9 +6,13 @@ import requests
 from datetime import datetime
 import pytz
 
-from flask import Flask, jsonify, request
+from flask import Blueprint, jsonify, request
 
-app = Flask(__name__)
+point_app = Blueprint('point_app', __name__)
+
+@point_app.route('/point')
+def index():
+    return 'Hello from point_app!'
 
 now_utc = datetime.now(pytz.utc)
 jst = pytz.timezone('Asia/Tokyo')
@@ -48,6 +52,10 @@ PARAMS2={
     },
   }
 }
+
+# ユーザー情報管理DB
+APPID3 = 6
+API_TOKEN3="pHRbZwtEMLU9se9oVxKfSJ8OisiJDeuIML372l3S"
 
 
 # -------------------------------- 関数定義 -----------------------------------
@@ -115,8 +123,9 @@ def update_kintone_record(url, api_token, appid, recordid, auth_id, field_code, 
 
 def update_total_points(url, userid, points):
     records = get_kintone_record_by_uid(url, API_TOKEN2, APPID2, userid)
+    records2 = get_kintone_record_by_uid(url, API_TOKEN3, APPID3, userid)
 
-    if records:
+    if records and records2:
         # 現在の合計ポイントを取得して+1
         record = records[0]
         current_points = int(record['Total_Points']['value'])
@@ -127,6 +136,13 @@ def update_total_points(url, userid, points):
         auth_id = record['Auth_ID']['value']  # 必須フィールドを含める
         response = update_kintone_record(url, API_TOKEN2, APPID2, record_id, auth_id, 'Total_Points', new_points)
 
+        # APPID3に関連するレコードのIDを取得
+        records3 = get_kintone_record_by_uid(url, API_TOKEN3, APPID3, userid)
+        print(new_points)
+        if records3:
+            record_id3 = records3[0]['$id']['value']
+            update_kintone_record(url, API_TOKEN3, APPID3, record_id3, auth_id, 'Total_Points', new_points)
+
         # 結果の表示
         if response:
             print("レコードが正常に更新されました")
@@ -134,18 +150,12 @@ def update_total_points(url, userid, points):
         else:
             print("レコードの更新に失敗しました")
 
-# if __name__=="__main__":
-#     RESP=update_total_points(URL, 888, 1)
-
-    
-#     print(RESP)
-
 # ------------------------------ エンドポイントの定義 ----------------------------------
-@app.route('/record/<userid>/<int:points>', methods=['POST'])
+@point_app.route('/record/<userid>/<int:points>', methods=['POST'])
 def update_totalPoints_endpoint(userid, points):
     return update_total_points(userid, points)
 
-@app.route('/record/<userid>', methods=['GET'])
+@point_app.route('/record/<userid>', methods=['GET'])
 def get_totalPoints_endpoint(userid):
     records = get_kintone_record_by_uid(URL, API_TOKEN2, APPID2, userid)
 
@@ -156,4 +166,16 @@ def get_totalPoints_endpoint(userid):
     else:
         return jsonify({"error": "No records found for the user"}), 404
 
-@app.route('/record/<userid>', method=['POST'])
+@point_app.route('/record/<userid>', methods=['POST'])
+def get_and_use_allpoints(userid):
+    records = get_kintone_record_by_uid(URL, API_TOKEN2, APPID2, userid)
+
+    if records:
+        record = records[0]
+        current_points = int(record['Total_Points']['value'])
+
+        update_total_points(userid, -current_points)    
+
+        return current_points
+    else:
+        return jsonify({"error": "No records found for the user"}), 404
