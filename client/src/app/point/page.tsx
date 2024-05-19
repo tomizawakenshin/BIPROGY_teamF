@@ -1,26 +1,35 @@
-import Image from 'next/image'
-import React from 'react'
+import Image from 'next/image';
+import React from 'react';
+
+import cat1 from '../../../public/GIF_character/Cat1.gif';
+import castle from '../../../public/photo/castle.png';
 
 const page = () => {
   return (
     <div>
-        <div>
-            <img src='./GIF_character/Cat1.gif' className='justify-right' width={300} height={300}></img>
-        </div>
-        <div className='flex items-center justify-center'>
-            <div className='
+      <div>
+        <Image
+          src={cat1}
+          alt='cat1'
+          className='justify-right z-10 relative'
+          width={300}
+          height={300}
+        />
+      </div>
+      <div className='flex items-center justify-center'>
+        <div
+          className='
                 fixed
                 top-0
                 left-0
                 w-full
-                h-screen
-                z-[-1]'>
-                    <Image src={`/photo/castle.png`} layout={'fill'} objectFit={'cover'} alt=''/>
-            </div>
+                h-screen'
+        >
+          <Image src={castle} layout={'fill'} objectFit={'cover'} alt='' />
         </div>
-
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
