@@ -21,7 +21,6 @@ const LoginCallback: React.FC = () => {
                 client_id: clientId || '',
                 client_secret: clientSecret || '',
             });
-            console.log("data is " + JSON.stringify(data));
 
             try {
                 // アクセストークンの取得

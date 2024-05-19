@@ -1,3 +1,9 @@
+// 以下のようにログイン状態でないと見れない要素をCheckLoginで囲う
+// 未ログイン状態だったらログインページ'/login'にリダイレクトする
+// <CheckLogin>
+//    <ProtectedComponent />
+// </CheckLogin>
+
 "use client";
 
 import React, { useEffect, useState, ReactNode } from 'react';
@@ -56,9 +62,3 @@ const CheckLogin: React.FC<CheckLoginProps> = ({ children }) => {
 };
 
 export default CheckLogin;
-
-// 以下のようにログイン状態でないと見れない要素をCheckLoginで囲う
-// 未ログイン状態だったらログインページ'/login'にリダイレクトする
-// <CheckLogin>
-//    <ProtectedComponent />
-// </CheckLogin>
