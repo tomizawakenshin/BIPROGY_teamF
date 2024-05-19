@@ -9,8 +9,11 @@ export function QuestionStartEnd() {
 
   const onStart = async () => {
     const res = await startQuestion();
-    // TODO: グループトークへのリダイレクト
-    if (res) router.push('https://line.me/R');
+    // スマホならLINE(https://line.me/R)に遷移
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      router.push('https://line.me/R');
+    }
   };
 
   const onEnd = async () => {
