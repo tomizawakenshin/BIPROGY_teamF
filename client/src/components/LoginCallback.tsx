@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import {
   getAccessToken,
   getLoginState,
+  getSession,
   getUserInfo,
   setSession,
   setUserInfo,
@@ -30,6 +31,11 @@ const LoginCallback: React.FC = () => {
       });
 
       try {
+        if (await getSession()) {
+          router.push('/');
+          return;
+        }
+
         // アクセストークンの取得
         const response = await getAccessToken(data.toString());
 
@@ -39,9 +45,7 @@ const LoginCallback: React.FC = () => {
         await setSession(accessToken);
 
         // ユーザ情報を取得
-        const userInfoResponse = await getUserInfo(accessToken);
-
-        const userInfo = userInfoResponse.data;
+        const userInfo = await getUserInfo(accessToken);
 
         // バックエンドにユーザ情報を送信してデータベースに登録及びログイン処理
         setUserInfo(userInfo, idToken);

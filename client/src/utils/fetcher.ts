@@ -34,6 +34,11 @@ export async function setSession(accessToken: string) {
   localStorage.setItem('accessToken', accessToken);
 }
 
+export async function checkLogin(accessToken: string) {
+  const res = await get(`${process.env.NEXT_PUBLIC_API_URL}/check-login`, accessToken);
+  return res as any;
+}
+
 export async function getLoginState() {
   return localStorage.getItem('loginState');
 }
@@ -51,19 +56,19 @@ export async function getAccessToken(data: string) {
 }
 
 export async function getUserInfo(accessToken: string) {
-  return await axios.get('https://api.line.me/v2/profile', {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const res = await get('https://api.line.me/v2/profile', accessToken);
+  return res as any;
 }
 
 export async function setUserInfo(userInfo: any, idToken: any) {
-  return await axios.post('http://localhost:3000/api/register', {
+  const session = await getSession();
+  if (!session) return { message: 'ユーザー情報を登録できませんでした' };
+  const res = await post(`${process.env.NEXT_PUBLIC_API_URL}/register`, session, {
     userId: userInfo.userId,
     displayName: userInfo.displayName,
     idToken: idToken,
   });
+  return res;
 }
 
 export async function getPoint() {

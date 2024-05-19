@@ -4,6 +4,7 @@ import React, { useEffect, useState, ReactNode } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { Loading } from '@/components/loading';
+import { checkLogin } from '@/utils/fetcher';
 
 interface CheckLoginProps {
   children: ReactNode;
@@ -17,6 +18,12 @@ const CheckLogin: React.FC<CheckLoginProps> = ({ children }) => {
 
   useEffect(() => {
     const checkLoginStatus = async () => {
+      if (isLoggedIn && pathname !== '/') {
+        setLoading(false);
+        router.push('/');
+        return;
+      }
+
       if (pathname === '/login' || pathname === '/login/callback') {
         setLoading(false);
         return;
@@ -29,14 +36,9 @@ const CheckLogin: React.FC<CheckLoginProps> = ({ children }) => {
       }
 
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/check-login`, {
-          // TODO: エンドポイントはまだ適当
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        const response = await checkLogin(accessToken);
 
-        if (response.data.loggedIn) {
+        if (response?.loggedIn) {
           setIsLoggedIn(true);
         } else {
           router.push('/login');
@@ -50,7 +52,7 @@ const CheckLogin: React.FC<CheckLoginProps> = ({ children }) => {
     };
 
     checkLoginStatus();
-  }, [router, pathname]);
+  }, [router, pathname, isLoggedIn]);
 
   if (loading) {
     return <Loading />;
