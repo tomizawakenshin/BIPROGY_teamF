@@ -134,10 +134,10 @@ export async function updateStatus(emoji: string) {
 
 export async function getUsers() {
   // return [
-  //   { name: 'user1', status: '🙅‍♀️', id: 1 },
-  //   { name: 'user2', status: '🙆‍♀️', id: 2 },
-  //   { name: 'user3', status: '🙆‍♀️', id: 3 },
-  //   { name: 'user4', status: '🙅‍♀️', id: 4 },
+  //   { name: 'user1', status: '👍', id: 1 },
+  //   { name: 'user2', status: '😶', id: 2 },
+  //   { name: 'user3', status: '😶', id: 3 },
+  //   { name: 'user4', status: '💦', id: 4 },
   //   { name: 'user5', status: '🙆‍♀️', id: 5 },
   // ] as User[];
   const session = await getSession();

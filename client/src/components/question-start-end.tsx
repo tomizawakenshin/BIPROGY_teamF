@@ -22,8 +22,12 @@ export function QuestionStartEnd() {
 
   return (
     <div className='flex justify-between gap-2'>
-      <Button onClick={onStart}>質問開始</Button>
-      <Button onClick={onEnd}>質問終了</Button>
+      <Button className='border-zinc-400 hover:bg-zinc-100' onClick={onStart}>
+        質問開始
+      </Button>
+      <Button className='border-zinc-400 hover:bg-zinc-100' onClick={onEnd}>
+        質問終了
+      </Button>
     </div>
   );
 }

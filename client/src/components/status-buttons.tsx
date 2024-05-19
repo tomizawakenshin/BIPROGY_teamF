@@ -9,12 +9,11 @@ import { Emoji, emojis } from '@/utils/assets';
 
 export function StatusButtons() {
   const [status, setStatus] = useState<Emoji | null>({
-    label: '🙅‍♀️',
-    text: '質問対応中',
-    path: 'x',
+    label: '😶',
+    text: 'フリー',
   });
   const changeStatus = async (emoji: Emoji) => {
-    const res = await updateStatus(emoji.path);
+    const res = await updateStatus(emoji.label);
     if (res) {
       setStatus(emoji);
     }
@@ -35,9 +34,9 @@ export function StatusButtons() {
           <Button
             className={clsx(
               'p-0',
-              status?.path === emoji.path
+              status?.text === emoji.text
                 ? 'bg-indigo-100 hover:bg-indigo-200 border-indigo-400'
-                : ''
+                : 'border-zinc-400 hover:bg-zinc-100'
             )}
             key={emoji.text}
             onClick={() => changeStatus(emoji)}
