@@ -1,3 +1,4 @@
+import PointHolder from '../components/PointHolder';
 import { Divider } from '@/components/divider';
 import { PointView } from '@/components/point-view';
 import { QuestionStartEnd } from '@/components/question-start-end';
@@ -14,7 +15,8 @@ export default function Home() {
       <Divider />
       <UserList />
       <Divider />
-      <PointView />
+      {/* <PointView /> */}
+      <PointHolder />
     </div>
   );
 }
