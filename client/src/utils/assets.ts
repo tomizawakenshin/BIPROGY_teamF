@@ -26,3 +26,8 @@ export const emojis: Emoji[] = [
     path: '/v',
   },
 ];
+
+export const QUESTION_STATE = {
+  START: 1,
+  END: 0,
+};
