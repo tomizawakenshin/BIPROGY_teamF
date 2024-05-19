@@ -22,7 +22,7 @@ export function StatusButtons() {
 
   useEffect(() => {
     getStatus().then((res) => {
-      const emoji = emojis.find((emoji) => emoji.text === res.status);
+      const emoji = emojis.find((emoji) => emoji.label === res);
       if (emoji) setStatus(emoji || null);
     });
   }, []);

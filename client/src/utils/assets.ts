@@ -8,11 +8,21 @@ export const emojis: Emoji[] = [
   {
     label: '🙅‍♀️',
     text: '質問対応中',
-    path: 'x',
+    path: '/x',
   },
   {
     label: '🙆‍♀️',
     text: '待機中',
-    path: 'o',
+    path: '/o',
+  },
+  {
+    label: '🙇‍♀️',
+    text: '忙しい',
+    path: '/b',
+  },
+  {
+    label: '🏄‍♀️',
+    text: '休み',
+    path: '/v',
   },
 ];

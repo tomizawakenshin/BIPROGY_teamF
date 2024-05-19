@@ -12,11 +12,11 @@ export default function Home() {
         <h1 className='text-4xl font-bold'>エンジニアの質問箱</h1>
         <QuestionStartEnd />
         <Divider />
-        <PointView />
-        <Divider />
         <StatusButtons />
         <Divider />
         <UserList />
+        <Divider />
+        <PointView />
       </div>
     </main>
   );
