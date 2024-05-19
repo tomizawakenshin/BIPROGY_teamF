@@ -79,10 +79,11 @@ def update_q_status():
     user_id = data.get('user_id')
     status = data.get('status')
     
-    response_json, timestamp = update_kintone_q_status(user_id, status)
+    response_json = update_kintone_q_status(user_id, status)
+    response_json2 = update_kintone_U_status(user_id, status)
     
     if response_json:        
-        return jsonify(updated_record), 200
+        return jjsonify(response_json), 200
     else:
         return jsonify(response_json), status_code
 
