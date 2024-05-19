@@ -17,7 +17,7 @@ const PointHolder = () => {
 
   useEffect(() => {
     getPoint().then((res) => {
-      setPoint(1);
+      setPoint(res);
     });
   }, []);
 
