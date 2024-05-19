@@ -1,28 +1,32 @@
 export type Emoji = {
   label: string;
   text: string;
-  path: string;
 };
 
 export const emojis: Emoji[] = [
   {
-    label: '🙅‍♀️',
-    text: '質問対応中',
-    path: '/x',
+    label: '😶',
+    text: 'フリー',
   },
   {
-    label: '🙆‍♀️',
-    text: '待機中',
-    path: '/o',
+    label: '👍',
+    text: '質問受付中！',
   },
   {
-    label: '🙇‍♀️',
+    label: '💦',
     text: '忙しい',
-    path: '/b',
   },
   {
-    label: '🏄‍♀️',
-    text: '休み',
-    path: '/v',
+    label: '😣',
+    text: '手こずってる',
+  },
+  {
+    label: '😵',
+    text: '助けて！',
   },
 ];
+
+export const QUESTION_STATE = {
+  START: 1,
+  END: 0,
+};

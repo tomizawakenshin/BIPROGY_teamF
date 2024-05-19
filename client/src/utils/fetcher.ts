@@ -1,5 +1,6 @@
 import { User } from '@/types/data';
 import baseAxios from 'axios';
+import { QUESTION_STATE } from './assets';
 
 const axios = baseAxios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -97,14 +98,22 @@ export async function usePoint(point: number) {
 export async function startQuestion() {
   const session = await getSession();
   if (!session) return { message: '質問を開始できませんでした' };
-  const res = await post(`${process.env.NEXT_PUBLIC_API_URL}/question/start`, session, {});
+  const res = await post(
+    `${process.env.NEXT_PUBLIC_API_URL}/question`,
+    session,
+    QUESTION_STATE.START
+  );
   return res;
 }
 
 export async function endQuestion() {
   const session = await getSession();
   if (!session) return { message: '質問を終了できませんでした' };
-  const res = await post(`${process.env.NEXT_PUBLIC_API_URL}/question/end`, session, {});
+  const res = await post(
+    `${process.env.NEXT_PUBLIC_API_URL}/question`,
+    session,
+    QUESTION_STATE.END
+  );
   return res;
 }
 
@@ -125,10 +134,10 @@ export async function updateStatus(emoji: string) {
 
 export async function getUsers() {
   // return [
-  //   { name: 'user1', status: '🙅‍♀️', id: 1 },
-  //   { name: 'user2', status: '🙆‍♀️', id: 2 },
-  //   { name: 'user3', status: '🙆‍♀️', id: 3 },
-  //   { name: 'user4', status: '🙅‍♀️', id: 4 },
+  //   { name: 'user1', status: '👍', id: 1 },
+  //   { name: 'user2', status: '😶', id: 2 },
+  //   { name: 'user3', status: '😶', id: 3 },
+  //   { name: 'user4', status: '💦', id: 4 },
   //   { name: 'user5', status: '🙆‍♀️', id: 5 },
   // ] as User[];
   const session = await getSession();
