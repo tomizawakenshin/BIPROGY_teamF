@@ -6,9 +6,9 @@ import requests
 from datetime import datetime
 import pytz
 
-from flask import Flask, jsonify, request
+from flask import Blueprint, jsonify, request
 
-app = Flask(__name__)
+point_app = Blueprint('point_app', __name__)
 
 now_utc = datetime.now(pytz.utc)
 jst = pytz.timezone('Asia/Tokyo')
@@ -131,7 +131,13 @@ def update_total_points(url, userid, points):
         record_id = record['$id']['value']
         auth_id = record['Auth_ID']['value']  # 必須フィールドを含める
         response = update_kintone_record(url, API_TOKEN2, APPID2, record_id, auth_id, 'Total_Points', new_points)
-        update_kintone_record(url, API_TOKEN3, APPID3, record_id, auth_id, 'Total_Points', new_points)
+
+        # APPID3に関連するレコードのIDを取得
+        records3 = get_kintone_record_by_uid(url, API_TOKEN3, APPID3, userid)
+        print(new_points)
+        if records3:
+            record_id3 = records3[0]['$id']['value']
+            update_kintone_record(url, API_TOKEN3, APPID3, record_id3, auth_id, 'Total_Points', new_points)
 
         # 結果の表示
         if response:
@@ -147,11 +153,11 @@ if __name__=="__main__":
     print(RESP)
 
 # ------------------------------ エンドポイントの定義 ----------------------------------
-@app.route('/record/<userid>/<int:points>', methods=['POST'])
+@point_app.route('/record/<userid>/<int:points>', methods=['POST'])
 def update_totalPoints_endpoint(userid, points):
     return update_total_points(userid, points)
 
-@app.route('/record/<userid>', methods=['GET'])
+@point_app.route('/record/<userid>', methods=['GET'])
 def get_totalPoints_endpoint(userid):
     records = get_kintone_record_by_uid(URL, API_TOKEN2, APPID2, userid)
 
@@ -162,7 +168,7 @@ def get_totalPoints_endpoint(userid):
     else:
         return jsonify({"error": "No records found for the user"}), 404
 
-@app.route('/record/<userid>', method=['POST'])
+@point_app.route('/record/<userid>', methods=['POST'])
 def get_and_use_allpoints(userid):
     records = get_kintone_record_by_uid(URL, API_TOKEN2, APPID2, userid)
 
