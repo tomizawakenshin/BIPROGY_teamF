@@ -10,6 +10,9 @@ APP_ID = 4
 API_TOKEN = 'P1Gqws7UJpRvj8MTeenezpVAm5Ce7yrW9AeyYWHI'
 #KINTONE_URL = f'https://SUBDOMAIN.cybozu.com/k//'
 
+APP_ID2 = 6
+API_TOKEN2="pHRbZwtEMLU9se9oVxKfSJ8OisiJDeuIML372l3S"
+
 # キントーンのレコードを更新する関数
 def update_kintone_status(user_id, status):
     url = f'https://SUBDOMAIN.cybozu.com/k/v1/'
@@ -38,6 +41,33 @@ def update_kintone_status(user_id, status):
     response = requests.put(url, headers=headers, json=payload)
     if response.status_code == 200:
         return response.json(),timestamp
+    else:
+        return None, None
+
+# キントーンのレコード(User)を更新する関数
+def update_kintone_U_status(user_id, status):
+    url = f'https://SUBDOMAIN.cybozu.com/k/v1/'
+    headers = {
+        'X-Cybozu-API-Token': API_TOKEN2,
+        'Content-Type': 'application/json'
+    }
+    
+    payload = {
+        'app': APP_ID2,
+        'updateKey': {
+            'field': 'user_id',
+            'value': user_id
+        },
+        'record': {
+            'status': {
+                'value': status
+                }
+            }
+        }
+    }
+    response = requests.put(url, headers=headers, json=payload)
+    if response.status_code == 200:
+        return response.json()
     else:
         return None, None
             
