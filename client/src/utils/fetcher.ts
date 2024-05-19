@@ -1,5 +1,13 @@
 import { User } from '@/types/data';
-import axios from 'axios';
+import baseAxios from 'axios';
+
+const axios = baseAxios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  },
+});
 
 export async function get<T>(path: string, session: string) {
   const response = await axios
