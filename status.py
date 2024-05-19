@@ -9,7 +9,7 @@ app = Flask(__name__)
 SUBDOMAIN = 'uuyjiffe0wf5'
 APP_ID = 4
 API_TOKEN = 'P1Gqws7UJpRvj8MTeenezpVAm5Ce7yrW9AeyYWHI'
-#KINTONE_URL = f'https://SUBDOMAIN.cybozu.com/k//'
+#KINTONE_URL = f'https://uuyjiffe0wf5.cybozu.com/k//'
 
 APP_ID2 = 6
 API_TOKEN2="pHRbZwtEMLU9se9oVxKfSJ8OisiJDeuIML372l3S"
