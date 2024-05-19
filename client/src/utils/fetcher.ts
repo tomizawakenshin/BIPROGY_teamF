@@ -44,7 +44,7 @@ export async function setSession(accessToken: string) {
 }
 
 export async function checkLogin(accessToken: string) {
-  const res = await get(`${process.env.NEXT_PUBLIC_API_URL}/check-login`, accessToken);
+  const res = await get(`${process.env.NEXT_PUBLIC_API_URL}/api/check-login`, accessToken);
   return res as any;
 }
 
@@ -60,6 +60,7 @@ export async function getAccessToken(data: string) {
   return await axios.post('https://api.line.me/oauth2/v2.1/token', data, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
+      'Access-Control-Allow-Origin': process.env.NEXT_PUBLIC_API_URL,
     },
   });
 }
@@ -72,7 +73,7 @@ export async function getUserInfo(accessToken: string) {
 export async function setUserInfo(userInfo: any, idToken: any) {
   const session = await getSession();
   if (!session) return { message: 'ユーザー情報を登録できませんでした' };
-  const res = await post(`${process.env.NEXT_PUBLIC_API_URL}/register`, session, {
+  const res = await post(`${process.env.NEXT_PUBLIC_API_URL}/api/register`, session, {
     userId: userInfo.userId,
     displayName: userInfo.displayName,
     idToken: idToken,
@@ -119,10 +120,10 @@ export async function endQuestion() {
 
 export async function getStatus() {
   const session = await getSession();
-  if (!session) return '🙅‍♀️';
+  if (!session) return '👍';
 
   const status = await get<string>(`${process.env.NEXT_PUBLIC_API_URL}/status`, session);
-  return status ?? '🙅‍♀️';
+  return status ?? '👍';
 }
 
 export async function updateStatus(emoji: string) {
