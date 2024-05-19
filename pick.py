@@ -12,7 +12,7 @@ API_TOKEN = 'P1Gqws7UJpRvj8MTeenezpVAm5Ce7yrW9AeyYWHI'
 
 # キントーンのデータを取得する関数
 def get_kintone_data():
-    url = f'https://SUBDOMAIN.cybozu.com/k/v1/'
+    url = f'https://uuyjiffe0wf5.cybozu.com/k/v1/'
     headers = {
         'X-Cybozu-API-Token': KINTONE_API_TOKEN,
         'Content-Type': 'application/json'
