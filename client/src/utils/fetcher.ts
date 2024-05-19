@@ -74,6 +74,13 @@ export async function getPoint() {
   return point ?? 0;
 }
 
+export async function usePoint(point: number) {
+  const session = await getSession();
+  if (!session) return { message: 'ポイントを使用できませんでした' };
+  const res = await post(`${process.env.NEXT_PUBLIC_API_URL}/point`, session, { point });
+  return res;
+}
+
 export async function startQuestion() {
   const session = await getSession();
   if (!session) return { message: '質問を開始できませんでした' };
@@ -99,7 +106,7 @@ export async function getStatus() {
 export async function updateStatus(emoji: string) {
   const session = await getSession();
   if (!session) return { message: 'ステータスを更新できませんでした' };
-  const res = await post(`${process.env.NEXT_PUBLIC_API_URL}/status`, session, { emoji: emoji });
+  const res = await post(`${process.env.NEXT_PUBLIC_API_URL}/status`, session, { emoji });
   return res;
 }
 
