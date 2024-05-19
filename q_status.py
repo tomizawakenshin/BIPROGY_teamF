@@ -14,7 +14,7 @@ APP_ID2 = 6
 API_TOKEN2="pHRbZwtEMLU9se9oVxKfSJ8OisiJDeuIML372l3S"
 
 
-# キントーンのレコードを更新する関数
+# キントーンのレコード(Q)を更新する関数
 def update_kintone_q_status(user_id, status):
     url = f'https://SUBDOMAIN.cybozu.com/k/v1/'
     headers = {
@@ -46,7 +46,7 @@ def update_kintone_q_status(user_id, status):
     else:
         return None, None
 
-# キントーンのレコードを更新する関数
+# キントーンのレコード(User)を更新する関数
 def update_kintone_U_status(user_id, status):
     url = f'https://SUBDOMAIN.cybozu.com/k/v1/'
     headers = {
