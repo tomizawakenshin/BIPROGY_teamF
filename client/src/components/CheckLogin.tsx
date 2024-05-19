@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, ReactNode } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import axios from 'axios';
 import { Loading } from '@/components/loading';
 import { checkLogin } from '@/utils/fetcher';
 
