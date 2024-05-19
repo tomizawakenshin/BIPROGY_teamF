@@ -82,7 +82,7 @@ def update_status():
     response_json2 = update_kintone_U_status(user_id, status)
     
     if response_json:        
-        return jjsonify(response_json), 200
+        return jsonify(response_json), 200
     else:
         return jsonify({'error': 'レコードの更新に失敗しました'}), 500
 
