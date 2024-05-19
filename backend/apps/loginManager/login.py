@@ -62,8 +62,9 @@ def login():
             },
         }
     }
-    headers={"X-Cybozu-API-Token":API_TOKEN3,"Content-Type":"application/json"}
-    requests.post(URL+"record.json",json=params,headers=headers)
+    if not check_user_existence(URL, user_id):
+        headers={"X-Cybozu-API-Token":API_TOKEN3,"Content-Type":"application/json"}
+        requests.post(URL+"record.json",json=params,headers=headers)
 
     # クッキーの作成
     response = make_response(jsonify({"message": "User registered successfully"}))
