@@ -30,6 +30,42 @@ export async function getSession() {
   return localStorage.getItem('accessToken');
 }
 
+export async function setSession(accessToken: string) {
+  localStorage.setItem('accessToken', accessToken);
+}
+
+export async function getLoginState() {
+  return localStorage.getItem('loginState');
+}
+
+export async function setLoginState(state: string) {
+  localStorage.setItem('loginState', state);
+}
+
+export async function getAccessToken(data: string) {
+  return await axios.post('https://api.line.me/oauth2/v2.1/token', data, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  });
+}
+
+export async function getUserInfo(accessToken: string) {
+  return await axios.get('https://api.line.me/v2/profile', {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}
+
+export async function setUserInfo(userInfo: any, idToken: any) {
+  return await axios.post('http://localhost:3000/api/register', {
+    userId: userInfo.userId,
+    displayName: userInfo.displayName,
+    idToken: idToken,
+  });
+}
+
 export async function getPoint() {
   const session = await getSession();
   if (!session) return 0;
