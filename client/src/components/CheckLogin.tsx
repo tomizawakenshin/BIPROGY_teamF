@@ -21,7 +21,7 @@ const CheckLogin: React.FC<CheckLoginProps> = ({ children }) => {
 
     useEffect(() => {
         const checkLoginStatus = async () => {
-            const accessToken = sessionStorage.getItem('accessToken');
+            const accessToken = localStorage.getItem('accessToken');
             if (!accessToken) {
                 router.push('/login');
                 return;

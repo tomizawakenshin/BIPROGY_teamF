@@ -7,13 +7,14 @@ const LoginWithLine: React.FC = () => {
         const clientId = process.env.NEXT_PUBLIC_CHANNEL_ID;
         const redirectUri = encodeURIComponent('http://localhost:3000/login/callback');
         const state = GenerateRandomString(8); // セッションごとに固有のランダム文字列を生成
-        sessionStorage.setItem('loginState', state); // stateをセッションストレージに保存
+        localStorage.setItem('loginState', state); // stateをローカルストレージに保存(後で認可の際にstateが正しいかをチェックされる)
         const scope = 'profile%20openid';
 
         // c.f. https://developers.line.biz/ja/docs/line-login/integrate-line-login/
         const lineLoginUrl = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}&scope=${scope}`;
 
         window.location.href = lineLoginUrl;
+        // この後LINE側の設定によりlocalhost:3000/login/callbackにリダイレクトされ、LoginCallback関数が呼び出される
     };
 
     return (

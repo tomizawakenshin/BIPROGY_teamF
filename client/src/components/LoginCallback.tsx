@@ -33,7 +33,7 @@ const LoginCallback: React.FC = () => {
                 const accessToken = response.data.access_token;
                 const idToken = response.data.id_token;
 
-                sessionStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('accessToken', accessToken);
 
                 // ユーザ情報を取得
                 const userInfoResponse = await axios.get('https://api.line.me/v2/profile', {
@@ -62,7 +62,7 @@ const LoginCallback: React.FC = () => {
             const code = urlParams.get('code');
             const state = urlParams.get('state');
 
-            if (state === sessionStorage.getItem('loginState')) {
+            if (state === localStorage.getItem('loginState')) { // stateが正しいかチェック (認可リクエスト送信者本人であるか確認)
                 await fetchAccessToken(code);
             }
         };
