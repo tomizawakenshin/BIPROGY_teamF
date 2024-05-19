@@ -48,7 +48,7 @@ def update_q_status():
         else:
             return None, None
     
-    response_json, timestamp = update_kintone_status(user_id, status)
+    response_json, timestamp = update_kintone_q_status(user_id, status)
     
     if response_json:        
         return jjsonify(updated_record), 200
