@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import CheckLogin from '@/components/CheckLogin';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ja'>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <main className='flex flex-col items-center justify-center min-h-screen bg-zinc-200'>
+          <CheckLogin>{children}</CheckLogin>
+        </main>
+      </body>
     </html>
   );
 }

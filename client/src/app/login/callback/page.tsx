@@ -1,7 +1,7 @@
 import LoginCallback from '@/components/LoginCallback';
 
 const CallbackPage = () => {
-    return <LoginCallback />;
+  return <LoginCallback />;
 };
 
 export default CallbackPage;

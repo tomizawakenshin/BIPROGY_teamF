@@ -1,64 +1,64 @@
-// 以下のようにログイン状態でないと見れない要素をCheckLoginで囲う
-// 未ログイン状態だったらログインページ'/login'にリダイレクトする
-// <CheckLogin>
-//    <ProtectedComponent />
-// </CheckLogin>
-
-"use client";
+'use client';
 
 import React, { useEffect, useState, ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
+import { Loading } from '@/components/loading';
+import { checkLogin } from '@/utils/fetcher';
 
 interface CheckLoginProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 const CheckLogin: React.FC<CheckLoginProps> = ({ children }) => {
-    const [loading, setLoading] = useState(true);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
-    useEffect(() => {
-        const checkLoginStatus = async () => {
-            const accessToken = localStorage.getItem('accessToken');
-            if (!accessToken) {
-                router.push('/login');
-                return;
-            }
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      if (isLoggedIn && pathname !== '/') {
+        setLoading(false);
+        router.push('/');
+        return;
+      }
 
-            try {
-                const response = await axios.get('http://localhost:3000/api/check-login', { // TODO: エンドポイントはまだ適当
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`
-                    }
-                });
+      if (pathname === '/login' || pathname === '/login/callback') {
+        setLoading(false);
+        return;
+      }
 
-                if (response.data.loggedIn) {
-                    setIsLoggedIn(true);
-                } else {
-                    router.push('/login');
-                }
-            } catch (error) {
-                console.error(error);
-                router.push('/login');
-            } finally {
-                setLoading(false);
-            }
-        };
+      const accessToken = localStorage.getItem('accessToken');
+      if (!accessToken) {
+        router.push('/login');
+        return;
+      }
 
-        checkLoginStatus();
-    }, [router]);
+      try {
+        const response = await checkLogin(accessToken);
 
-    if (loading) {
-        return <div>読込中...</div>;
-    }
+        if (response?.loggedIn) {
+          setIsLoggedIn(true);
+        } else {
+          router.push('/login');
+        }
+      } catch (error) {
+        console.error(error);
+        router.push('/login');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    if (!isLoggedIn) {
-        return null;
-    }
+    checkLoginStatus();
+  }, [router, pathname, isLoggedIn]);
 
-    return <>{children}</>;
+  if (loading) {
+    return <Loading />;
+  }
+
+  return <>{children}</>;
 };
 
 export default CheckLogin;
