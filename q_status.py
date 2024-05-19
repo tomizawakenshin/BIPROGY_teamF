@@ -9,7 +9,7 @@ app = Flask(__name__)
 SUBDOMAIN = 'uuyjiffe0wf5'
 APP_ID = 5
 API_TOKEN = 'Vj7t9N0qU8QpkXtiP86L139czYYEiLKMSkcpHztm'
-#KINTONE_URL = f'https://SUBDOMAIN.cybozu.com/k/v1/'
+#KINTONE_URL = f'https://uuyjiffe0wf5.cybozu.com/k/v1/'
 
 APP_ID2 = 6
 API_TOKEN2="pHRbZwtEMLU9se9oVxKfSJ8OisiJDeuIML372l3S"
@@ -17,7 +17,7 @@ API_TOKEN2="pHRbZwtEMLU9se9oVxKfSJ8OisiJDeuIML372l3S"
 
 # キントーンのレコード(Q)を更新する関数
 def update_kintone_q_status(user_id, status):
-    url = f'https://SUBDOMAIN.cybozu.com/k/v1/'
+    url = f'https://.cybozu.com/k/v1/'
     headers = {
         'X-Cybozu-API-Token': API_TOKEN,
         'Content-Type': 'application/json'
