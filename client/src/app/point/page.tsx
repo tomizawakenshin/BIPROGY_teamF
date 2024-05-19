@@ -3,7 +3,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className=''>
+    <div>
         <div>
             <img src='./GIF_character/Cat1.gif' className='justify-right' width={300} height={300}></img>
         </div>
@@ -15,7 +15,7 @@ const page = () => {
                 w-full
                 h-screen
                 z-[-1]'>
-                    <Image src={`/photo/castle.png`} width={700} height={700} objectFit={'cover'} alt=''/>
+                    <Image src={`/photo/castle.png`} layout={'fill'} objectFit={'cover'} alt=''/>
             </div>
         </div>
 
