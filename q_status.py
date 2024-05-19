@@ -84,7 +84,7 @@ def update_q_status():
     response_json2 = update_kintone_U_status(user_id, status)
     
     if response_json:        
-        return jjsonify(response_json), 200
+        return jsonify(response_json), 200
     else:
         return jsonify(response_json), status_code
 
