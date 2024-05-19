@@ -55,7 +55,7 @@ def update_q_status():
     else:
         return jsonify({'error': 'レコードの更新に失敗しました'}), 500
 
-'''@app.route('()/status', methods=['POST'])
+@app.route('()/status', methods=['POST'])
 def update_q_status():
     data = request.json
     user_id = data.get('user_id')
@@ -70,7 +70,7 @@ def update_q_status():
             'userName': user_name
         }), 200
     else:
-        return jsonify(response_json), status_code'''
+        return jsonify(response_json), status_code
 
 
 if __name__ == '__main__':
