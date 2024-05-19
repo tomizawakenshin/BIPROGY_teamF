@@ -19,16 +19,16 @@ const PointHolder = () => {
                 ImagePath.map((key, value) => {
                     if((value % 4) == 0)
                     return(
-                        <iframe src='https://giphy.com/embed/8chbBx5bb0jDezayC0'></iframe>
+                        <iframe src='https://giphy.com/embed/8chbBx5bb0jDezayC0' key={key}></iframe>
                     ) 
                     else if((value % 4) == 1) {
-                        return(<iframe src='https://giphy.com/embed/4PNpBLLnCTelOzA6e7'></iframe>)
+                        return(<iframe src='https://giphy.com/embed/4PNpBLLnCTelOzA6e7' key={key}></iframe>)
                     }
                     else if((value % 4) == 2) {
-                         return(<iframe src='https://giphy.com/embed/bEsNyvZ3jU4Hi9qAfR'></iframe>)
+                         return(<iframe src='https://giphy.com/embed/bEsNyvZ3jU4Hi9qAfR' key={key}></iframe>)
                     }
                     else if((value % 4) == 3) {
-                        return(<iframe src='https://giphy.com/embed/93jBii3Mj2gQ3MyD5F'></iframe>)
+                        return(<iframe src='https://giphy.com/embed/93jBii3Mj2gQ3MyD5F' key={key}></iframe>)
                     }
                 })
             }
