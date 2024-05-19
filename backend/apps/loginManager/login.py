@@ -1,6 +1,12 @@
 import requests
 from flask import Blueprint, jsonify, request, make_response
 
+login_app = Blueprint('login_app', __name__)
+
+@login_app.route('/')
+def index():
+    return 'Hello from point_app!'
+
 URL="https://uuyjiffe0wf5.cybozu.com/k/v1/"
 # ユーザー情報管理DB
 APPID3 = 6
@@ -37,7 +43,7 @@ def check_user_existence(url, userid):
         return False
 
 
-@login_blueprint.route("/api/register", mothods=["POST"])
+@login_app.route("/api/register", methods=["POST"])
 def login():
     data = request.get_json()
     user_id = data.get("userId")

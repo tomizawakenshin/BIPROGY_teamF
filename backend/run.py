@@ -1,6 +1,6 @@
 from flask import Flask
-from apps.pointManager import create_app as create_pointManager_app
-from apps.loginManager import create_app as create_loginManager_app
+from apps.pointManager import create_pointManager_app
+from apps.loginManager import create_loginManager_app
 
 def create_main_app():
     app = Flask(__name__)

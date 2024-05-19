@@ -1,10 +1,9 @@
-from flask import Flask
+from flask import Flask, Blueprint
 from .point import point_app
 
-def create_app():
-    app = Flask(__name__)
+def create_pointManager_app():
+    point_manager_app = Blueprint('point_manager_app', __name__)
     
-    # point_appのブループリントを登録
-    app.register_blueprint(point_app)
-    
-    return app
+    point_manager_app.register_blueprint(point_app)
+
+    return point_manager_app

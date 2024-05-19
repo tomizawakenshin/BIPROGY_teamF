@@ -10,6 +10,10 @@ from flask import Blueprint, jsonify, request
 
 point_app = Blueprint('point_app', __name__)
 
+@point_app.route('/')
+def index():
+    return 'Hello from point_app!'
+
 now_utc = datetime.now(pytz.utc)
 jst = pytz.timezone('Asia/Tokyo')
 now_jst = now_utc.astimezone(jst)
@@ -145,12 +149,6 @@ def update_total_points(url, userid, points):
             print(response)
         else:
             print("レコードの更新に失敗しました")
-
-if __name__=="__main__":
-    RESP=update_total_points(URL, 888, 1)
-
-    
-    print(RESP)
 
 # ------------------------------ エンドポイントの定義 ----------------------------------
 @point_app.route('/record/<userid>/<int:points>', methods=['POST'])
