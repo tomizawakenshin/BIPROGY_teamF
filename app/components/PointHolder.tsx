@@ -14,21 +14,18 @@ const PointHolder = () => {
         <div>
             {pointCounter(point)}
         </div>
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-2 p-5'>
             {
                 ImagePath.map((key, value) => {
-                    if((value % 4) == 0)
+                    if((value % 3) == 0)
                     return(
-                        <iframe src='https://giphy.com/embed/8chbBx5bb0jDezayC0' key={key}></iframe>
+                        <img src='./GIF_character/Cat1.gif' width={300} height={300} key={key}></img>
                     ) 
-                    else if((value % 4) == 1) {
-                        return(<iframe src='https://giphy.com/embed/4PNpBLLnCTelOzA6e7' key={key}></iframe>)
+                    else if((value % 3) == 1) {
+                        return(<img src='./GIF_character/Cat2.gif' width={300} height={500} key={key}></img>)
                     }
-                    else if((value % 4) == 2) {
-                         return(<iframe src='https://giphy.com/embed/bEsNyvZ3jU4Hi9qAfR' key={key}></iframe>)
-                    }
-                    else if((value % 4) == 3) {
-                        return(<iframe src='https://giphy.com/embed/93jBii3Mj2gQ3MyD5F' key={key}></iframe>)
+                    else if((value % 3) == 2) {
+                         return(<img src='./GIF_character/Cat3.gif' width={300} height={300} key={key}></img>)
                     }
                 })
             }
@@ -40,37 +37,39 @@ const PointHolder = () => {
 const pointCounter = (point : number) => {
     if(point > 0) {
         return (
-            <div className='flex justify-center m-10'>
-                <button 
-                    onClick={() => {
-                        window.location.pathname = "/points"
-                    }}
-                    type="button"  
-                    className="
-                        text-white 
-                        bg-gradient-to-r 
-                        from-red-400 
-                        via-red-500 to-red-600 
-                        hover:bg-gradient-to-br 
-                        focus:ring-4 
-                        focus:outline-none 
-                        focus:ring-red-300 
-                        dark:focus:ring-red-800 
-                        shadow-lg 
-                        shadow-red-500/50 
-                        dark:shadow-lg 
-                        dark:shadow-red-800/80 
-                        font-medium 
-                        rounded-lg 
-                        px-5 
-                        py-2.5 
-                        text-center 
-                        me-2 
-                        mb-2
-                        text-4xl
-                        ">
-                            出撃する！
-                </button>
+            <div>
+                <div className='flex justify-center m-10'>
+                    <button 
+                        onClick={() => {
+                            window.location.pathname = "/points"
+                        }}
+                        type="button"  
+                        className="
+                            text-white 
+                            bg-gradient-to-r 
+                            from-red-400 
+                            via-red-500 to-red-600 
+                            hover:bg-gradient-to-br 
+                            focus:ring-4 
+                            focus:outline-none 
+                            focus:ring-red-300 
+                            dark:focus:ring-red-800 
+                            shadow-lg 
+                            shadow-red-500/50 
+                            dark:shadow-lg 
+                            dark:shadow-red-800/80 
+                            font-medium 
+                            rounded-lg 
+                            px-5 
+                            py-2.5 
+                            text-center 
+                            me-2 
+                            mb-2
+                            text-4xl
+                            ">
+                                出撃する！
+                    </button>
+                </div>
             </div>
         )
     } else {
