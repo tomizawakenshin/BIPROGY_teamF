@@ -42,6 +42,7 @@ const pointCounter = (point : number) => {
                     <button 
                         onClick={() => {
                             window.location.pathname = "/point"
+                            //ここにポイントを0にするapiを書く
                         }}
                         type="button"  
                         className="
