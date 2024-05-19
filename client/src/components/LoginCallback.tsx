@@ -45,7 +45,7 @@ const LoginCallback: React.FC = () => {
                 const userInfo = userInfoResponse.data;
 
                 // バックエンドにユーザ情報を送信してデータベースに登録及びログイン処理
-                await axios.post('http://localhost:3000/api/register', {
+                await axios.post('http://localhost:5000/api/register', {
                     userId: userInfo.userId,
                     displayName: userInfo.displayName,
                     idToken: idToken

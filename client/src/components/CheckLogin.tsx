@@ -28,7 +28,7 @@ const CheckLogin: React.FC<CheckLoginProps> = ({ children }) => {
             }
 
             try {
-                const response = await axios.get('http://localhost:3000/api/check-login', { // TODO: エンドポイントはまだ適当
+                const response = await axios.get('http://localhost:5000/api/check-login', { // TODO: エンドポイントはまだ適当
                     headers: {
                         'Authorization': `Bearer ${accessToken}`
                     }
